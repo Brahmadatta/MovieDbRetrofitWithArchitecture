@@ -4,11 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieRecylerViewHolder>{
@@ -32,7 +36,10 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MovieRecylerViewHolder holder, int position) {
-        holder.mTextView.setText(mMovieList.get(position).getMovie_title());
+        holder.movie_title.setText(mMovieList.get(position).getMovie_title());
+        holder.movie_vote_average.setText(String.valueOf(mMovieList.get(position).getVote_avg()));
+        Picasso.get().load(Constants.IMAGE_BASE_URL + mMovieList.get(position).getPoster_path()).into(holder.movie_image);
+
     }
 
     @Override
@@ -42,15 +49,18 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     public class MovieRecylerViewHolder extends RecyclerView.ViewHolder{
 
-        TextView mTextView;
+        TextView movie_title,movie_vote_average;
+        ImageView movie_image;
 
         public MovieRecylerViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.movie_title);
+            movie_title = itemView.findViewById(R.id.movie_title);
+            movie_vote_average = itemView.findViewById(R.id.movie_vote_average);
+            movie_image = itemView.findViewById(R.id.movie_image);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, ""+mTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, ""+movie_title.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -1,6 +1,7 @@
 package com.example.moviedbretrofitwitharchitectureexample;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,15 +74,8 @@ public class MovieRecyclerViewActivity extends AppCompatActivity {
     }
 
     private void bindList(List<Movie> movies) {
-
-
-//        for (Movie movie : movieList){z
-//            movieList.add(new Movie(movie.getId(),movie.getVote_avg(),movie.getMovie_title(),movie.getPoster_path()
-//                ,movie.getBackdrop_path(),movie.getOverview()));
-//        }
-
         mMovieRecyclerViewAdapter = new MovieRecyclerViewAdapter(movies,this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setAdapter(mMovieRecyclerViewAdapter);
 
     }
