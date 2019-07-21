@@ -3,19 +3,13 @@ package com.example.moviedbretrofitwitharchitectureexample.movierecyclerview;
 import android.view.View;
 
 import com.example.moviedbretrofitwitharchitectureexample.Movie;
+import com.example.moviedbretrofitwitharchitectureexample.common.ObservableViewMvc;
 
-public interface MoviesRecyclerViewItemMvc {
+public interface MoviesRecyclerViewItemMvc extends ObservableViewMvc<MoviesRecyclerViewItemMvc.Listener> {
 
     public interface Listener{
         void onMovieClicked(Movie movie);
     }
-
-    View getView();
-
-    void registerListener(Listener listener);
-
-    void unregisterListener(Listener listener);
-
 
     void bindData(Movie movie);
 }

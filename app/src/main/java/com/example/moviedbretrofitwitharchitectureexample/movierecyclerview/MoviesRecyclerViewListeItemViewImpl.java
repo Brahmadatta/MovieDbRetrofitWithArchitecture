@@ -10,14 +10,13 @@ import androidx.annotation.Nullable;
 
 import com.example.moviedbretrofitwitharchitectureexample.Movie;
 import com.example.moviedbretrofitwitharchitectureexample.R;
+import com.example.moviedbretrofitwitharchitectureexample.common.BaseObservableViewMvc;
+import com.example.moviedbretrofitwitharchitectureexample.common.BaseViewMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviesRecyclerViewListeItemViewImpl implements MoviesRecyclerViewItemMvc{
-
-    private View mView;
-    private List<Listener> mListeners = new ArrayList<>(1);
+public class MoviesRecyclerViewListeItemViewImpl extends BaseObservableViewMvc<MoviesRecyclerViewItemMvc.Listener> implements MoviesRecyclerViewItemMvc{
 
     private Movie mMovie;
     private TextView movie_title,movie_vote_average;
@@ -25,7 +24,7 @@ public class MoviesRecyclerViewListeItemViewImpl implements MoviesRecyclerViewIt
 
     public MoviesRecyclerViewListeItemViewImpl(LayoutInflater inflater, @Nullable ViewGroup parent) {
 
-        mView = inflater.inflate(R.layout.layout_movie_text,parent,false);
+        setView(inflater.inflate(R.layout.layout_movie_text,parent,false));
 
         movie_title = findViewById(R.id.movie_title);
         movie_vote_average = findViewById(R.id.movie_vote_average);
@@ -34,31 +33,13 @@ public class MoviesRecyclerViewListeItemViewImpl implements MoviesRecyclerViewIt
         getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (Listener listener : mListeners){
+                for (Listener listener : getListeners()){
                     listener.onMovieClicked(mMovie);
                 }
             }
         });
     }
 
-    private <T extends View>T findViewById(int id) {
-        return getView().findViewById(id);
-    }
-
-    @Override
-    public View getView() {
-        return mView;
-    }
-
-    @Override
-    public void registerListener(Listener listener) {
-        mListeners.add(listener);
-    }
-
-    @Override
-    public void unregisterListener(Listener listener) {
-        mListeners.remove(listener);
-    }
 
     @Override
     public void bindData(Movie movie) {
