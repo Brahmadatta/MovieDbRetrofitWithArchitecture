@@ -11,6 +11,7 @@ import com.example.moviedbretrofitwitharchitectureexample.Constants;
 import com.example.moviedbretrofitwitharchitectureexample.Movie;
 import com.example.moviedbretrofitwitharchitectureexample.MovieApi;
 import com.example.moviedbretrofitwitharchitectureexample.MovieListResponse;
+import com.example.moviedbretrofitwitharchitectureexample.screens.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MovieRecyclerViewActivity extends AppCompatActivity implements MovieRecyclerViewMvcImpl.Listener {
+public class MovieRecyclerViewActivity extends BaseActivity implements MovieRecyclerViewMvcImpl.Listener {
 
     private MovieApi mMovieApi;
 
@@ -42,11 +43,7 @@ public class MovieRecyclerViewActivity extends AppCompatActivity implements Movi
 
         mMovieRecyclerViewMvc.registerListener(this);
 
-        mMovieApi = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        .create(MovieApi.class);
+        mMovieApi = getCompositionRoot().getStackOverflowApi();
 
 
         setContentView(mMovieRecyclerViewMvc.getView());
