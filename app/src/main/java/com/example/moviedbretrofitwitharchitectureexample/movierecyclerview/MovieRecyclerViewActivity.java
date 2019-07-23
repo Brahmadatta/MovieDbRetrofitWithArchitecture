@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Toast;
-
-import com.example.moviedbretrofitwitharchitectureexample.Constants;
 import com.example.moviedbretrofitwitharchitectureexample.Movie;
 import com.example.moviedbretrofitwitharchitectureexample.MovieApi;
 import com.example.moviedbretrofitwitharchitectureexample.MovieListResponse;
-import com.example.moviedbretrofitwitharchitectureexample.screens.BaseActivity;
+import com.example.moviedbretrofitwitharchitectureexample.screens.common.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ public class MovieRecyclerViewActivity extends BaseActivity implements MovieRecy
 
 
 
-        mMovieRecyclerViewMvc = new MovieRecyclerViewMvcImpl(LayoutInflater.from(this),null);
+        mMovieRecyclerViewMvc = getCompositionRoot().getViewMvcFactory().getMoviesRecylerViewItemMvc(null);
 
 
 

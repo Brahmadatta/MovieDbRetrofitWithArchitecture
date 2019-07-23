@@ -8,7 +8,7 @@ import com.example.moviedbretrofitwitharchitectureexample.common.ViewMvc;
 
 import java.util.List;
 
-interface MovieRecyclerViewMvc extends ObservableViewMvc<MovieRecyclerViewMvc.Listener> {
+public interface MovieRecyclerViewMvc extends ObservableViewMvc<MovieRecyclerViewMvc.Listener> {
 
     public interface Listener{
         void onMoviesClicked(Movie movie);
